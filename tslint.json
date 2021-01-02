@@ -1,0 +1,27 @@
+{
+    "extends": [
+        "tslint:recommended"
+    ],
+    "rules": {
+        "array-type": false,
+        "arrow-parens": false,
+        "class-name":false,
+        "interface-name": false,
+        "interface-over-type-literal": false,
+        "max-line-length": [
+            true,
+            160
+        ],
+        "no-empty-interface": false,
+        "no-namespace": [
+            true,
+            "allow-declarations"
+        ],
+        // This is a declaration only repository, references are ok!
+        "no-reference": false,
+        "object-literal-sort-keys": false,
+        "radix": false,
+        "trailing-comma": false,
+        "trailing-space": false
+    }
+}

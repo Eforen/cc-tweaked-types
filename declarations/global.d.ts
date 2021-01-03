@@ -3,6 +3,7 @@ Functions in the global environment, defined in `bios.lua`. This does not
 include standard Lua functions.
 */
 
+/** @noSelfInFile */
 // declare global {
     
     /**
@@ -26,7 +27,7 @@ include standard Lua functions.
      * need to receive events while sleeping, consider using {@link os.startTimer|timers},
      * or the {@link parallel|parallel API}.
      * 
-     * @param {number} time The number of seconds to sleep for, rounded up to the
+     * @param time The number of seconds to sleep for, rounded up to the
      * nearest multiple of 0.05.
      * 
      * @see os.startTimer
@@ -44,8 +45,8 @@ include standard Lua functions.
     --- Writes a line of text to the screen without a newline at the end, wrapping
     -- text if necessary.
     --
-    -- @tparam string text The text to write to the string
-    -- @treturn number The number of lines written
+    -- @param text The text to write to the string
+    -- @return {number} The number of lines written
     -- @see print A wrapper around write that adds a newline and accepts multiple arguments
     -- @usage write("Hello, world")
     */
@@ -56,7 +57,7 @@ include standard Lua functions.
     -- necessary. After printing, the cursor is moved to the next line.
     --
     -- @param ... The values to print on the screen
-    -- @treturn number The number of lines written
+    -- @return {number} The number of lines written
     -- @usage print("Hello, world!")
     */
     declare function print(...args: any[]): void
@@ -75,18 +76,18 @@ include standard Lua functions.
     pasting, character replacement, history scrollback, auto-completion, and
     default values.
 
-    @tparam[opt] string replaceChar A character to replace each typed character with.
+    @paramopt] string replaceChar A character to replace each typed character with.
     This can be used for hiding passwords, for example.
-    @tparam[opt] table history A table holding history items that can be scrolled
+    @paramopt] table history A table holding history items that can be scrolled
     back to with the up/down arrow keys. The oldest item is at index 1, while the
     newest item is at the highest index.
-    @tparam[opt] function(partial: string):({ string... }|nil) completeFn A function
+    @paramopt] function(partial: string):({ string... }|nil) completeFn A function
     to be used for completion. This function should take the partial text typed so
     far, and returns a list of possible completion options.
-    @tparam[opt] string default Default text which should already be entered into
+    @paramopt] string default Default text which should already be entered into
     the prompt.
 
-    @treturn string The text typed in.
+    @return string The text typed in.
 
     @see cc.completion For functions to help with completion.
     @usage Read an string and echo it back to the user

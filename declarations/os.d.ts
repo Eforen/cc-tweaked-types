@@ -1,4 +1,5 @@
 // Defined in bios.lua
+/** @noSelfInFile */
 
 declare namespace os {
     
@@ -17,7 +18,7 @@ declare namespace os {
      * 
      * @deprecated Use @{require}.
      */
-    function loadAPI(path: any):void
+    function loadAPI(path: string):void
 
     /**
      * --- Unloads an API which was loaded by @{os.loadAPI}.
@@ -27,7 +28,9 @@ declare namespace os {
      * -- @tparam string name The name of the API to unload.
      * -- @deprecated Use @{require}.
      */
-    function unloadAPI(name: any):void
+    function unloadAPI(name: string):void
+
+    type OSEvent = any[]
 
     /**
      * - Pause execution of the current thread and waits for any events matching
@@ -40,9 +43,10 @@ declare namespace os {
      * Unlike @{os.pullEventRaw}, it will stop the application upon a "terminate"
      * event, printing the error "Terminated".
      * 
-     * @tparam[opt] string filter Event to filter for.
-     * @treturn string event The name of the event that fired.
-     * @treturn any param... Optional additional parameters of the event.
+     * @param[opt] string filter Event to filter for.
+     * @tupleReturn
+     * @return string event The name of the event that fired.
+     * @return any param... Optional additional parameters of the event.
      * @usage Listen for `mouse_click` events.
      * ```
      *     while true do
@@ -65,7 +69,11 @@ declare namespace os {
      * ```
      * @see os.pullEventRaw To pull the terminate event.
      */
-    function pullEvent(filter: any): void
+    function pullEvent(): [string, ...any[]]
+    function pullEvent(filter: string): [string, ...any[]]
+    function pullEvent(filter: "mouse_click"): [event:"mouse_click", button: string, x: number, y: number]
+    /** @return {[string, number]} event tuple */
+    function pullEvent(filter: "alarm"): [event: "alarm", id: number]
 
     /**
      * Pause execution of the current thread and waits for events, including the
@@ -89,15 +97,14 @@ declare namespace os {
      * 
      * @see os.pullEvent To pull events normally.
      */
-    function pullEventRaw(filter: any): void
+    function pullEventRaw(filter?: string): any
 
-    /*
+    /**
      * Pauses execution for the specified number of seconds, alias of @{_G.sleep}.
      *
-     * @tparam number time The number of seconds to sleep for, rounded up to the
-     * nearest multiple of 0.05.
+     * @param seconds The number of seconds to sleep for, rounded up to the nearest multiple of 0.05.
      */
-    function sleep(time:number):void
+    function sleep(seconds:number):void
 
     /**
      * Get the current CraftOS version (for example, `CraftOS 1.8`).
@@ -105,10 +112,10 @@ declare namespace os {
      * This is defined by `bios.lua`. For the current version of CC:Tweaked, this
      * should return `CraftOS 1.8`.
      *
-     * @treturn string The current CraftOS version.
+     * @return string The current CraftOS version.
      * @usage os.version()
      */
-     function version(): void
+     function version(): string
 
     /**
      * - Run the program at the given path with the specified environment and arguments.
@@ -150,13 +157,13 @@ declare namespace os {
      * to the nearest multiple of 0.05 seconds, as it waits for a fixed amount
      * of world ticks.
      *
-     * @param timer The number of seconds until the timer fires.
+     * @param seconds The number of seconds until the timer fires.
      * @return The ID of the new timer. This can be used to filter the
      *   {@code timer} event, or {@link #cancelTimer cancel the timer}.
      * @throws LuaException If the time is below zero.
      * @see #cancelTimer To cancel a timer.
      */
-    function startTimer( timer:number ): TimerToken
+    function startTimer( seconds:number ): TimerToken
 
     /**
      * Adds an event to the event queue. This event can later be pulled with

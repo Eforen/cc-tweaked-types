@@ -7,6 +7,7 @@
         "preserveConstEnums": true,
         "target": "es5",
         "moduleResolution": "node",
+        "types": ["typescript-to-lua/language-extensions"],
         "typeRoots": [
             "./node_modules/@types"
         ]

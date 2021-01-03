@@ -1,4 +1,7 @@
-declare class shell {
+/** @noSelfInFile */
+
+/** @noSelf */
+declare class Shell {
     /**
      * Run a program with the supplied arguments.
      * ________________________
@@ -274,4 +277,6 @@ declare class shell {
     switchTab(id: number): void
 }
 
-type CompletionFunction = (shell: shell, index: number, argument: string, previous: string[]) =>  string[] | null
+type CompletionFunction = (shell: Shell, index: number, argument: string, previous: string[]) =>  string[] | null
+
+declare const shell: Shell

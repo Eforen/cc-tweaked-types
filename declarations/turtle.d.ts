@@ -1,6 +1,5 @@
+/** @noSelfInFile */
 declare namespace turtle {
-    type InventorySlot = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15
-
     /**
      * Move the turtle forward one block.
      * ______________________________________________________________________________________________________________
@@ -92,7 +91,7 @@ declare namespace turtle {
      * @return[1] boolean Whether a block was broken.
      * @return[2] string | nil The reason no block was broken.
      */
-    function digUp(side?: 'left' | 'right'): [boolean, string | null]
+    function digDown(side?: 'left' | 'right'): [boolean, string | null]
 
     /**
      * Place a block or item into the world in front of the turtle.
@@ -170,7 +169,7 @@ declare namespace turtle {
      * @throws If the slot is out of range.
      * @see #getSelectedSlot()
      */
-    function select(slot: InventorySlot): boolean
+    function select(slot: number): boolean
 
     /**
      * Get the number of items in the given slot.
@@ -179,7 +178,7 @@ declare namespace turtle {
      * @return number The number of items in this slot.
      * @throws If the slot is out of range.
      */
-    function getItemCount(slot?: InventorySlot): number
+    function getItemCount(slot?: number): number
 
     /**
      * Get the remaining number of items which may be stored in this stack.
@@ -190,7 +189,7 @@ declare namespace turtle {
      * @return number The space left in in this slot.
      * @throws If the slot is out of range.
      */
-    function getItemCount(slot?: InventorySlot): number
+    function getItemCount(slot?: number): number
 
     /**
      * Check if there is a solid block in front of the turtle. In this case, solid refers to any non-air or liquid block.
@@ -323,14 +322,14 @@ declare namespace turtle {
      * @param[2] count? number How many items from the selected stack to transfer to the new slot
      * @return true
      */
-    function transferTo(slot:InventorySlot, count?: number): true
+    function transferTo(slot:number, count?: number): true
 
     /**
      * Get the {@link #select() currently selected} inventory slot.
      * ______________________________________________________________________________________________________________
      * @return InventorySlot current inventory slot
      */
-    function getSelectedSlot(): InventorySlot
+    function getSelectedSlot(): number
 
     /**
      * Get the maximum possible fuel limit.
@@ -409,5 +408,5 @@ declare namespace turtle {
      *    -- }
      * ```
      */
-    function getItemDetail(slot?: InventorySlot, detailed?: boolean): null | any
+    function getItemDetail(slot?: number, detailed?: boolean): null | any
 }

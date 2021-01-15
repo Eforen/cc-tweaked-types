@@ -72,7 +72,7 @@ declare namespace fs {
      * @return[2] string | nil A message explaining why the file cannot be opened.
      * @throws If an invalid mode was specified.
      */
-    function open(path: string, mode: string): FileHandle | [null, string | null];
+    function open(path: string, mode: string): [FileHandle] | [null, string | null];
 
 }
 

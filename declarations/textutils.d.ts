@@ -32,7 +32,7 @@ declare namespace textutils {
      * @return[1] nil If the object could not be deserialised.
      * @return[2] string A message describing why the JSON string is invalid.
      */
-    function unserializeJSON(s: string, options? :{nbt_style?: boolean, parse_null?: boolean}): boolean;
+    function unserializeJSON(s: string, options? :{nbt_style?: boolean, parse_null?: boolean}): any | [null, string];
 
 
 

@@ -16,7 +16,7 @@ declare namespace http {
     function websocket(url: string, headers?: {[key:string]: string}): lWebSocket | [false, string];
 }
 
-
+/** @noSelf **/
 declare class lWebSocket {
     /**
      * Wait for a message from the server.

@@ -3,20 +3,20 @@
 
 type ComputerSide = 'top' | 'bottom' | 'left' | 'right' | 'front' | 'back'
 declare namespace os {
-    
+
     /**
      * - Loads the given API into the global environment.
      *
      * **Warning** This function is deprecated. Use of this function will pollute the
      * global table, use @{require} instead.
-     * 
+     *
      * This function loads and executes the file at the given path, and all global
      * variables and functions exported by it will by available through the use of
      * `myAPI.<function name>`, where `myAPI` is the base name of the API file.
-     * 
+     *
      * @tparam string path The path of the API to load.
      * @treturn boolean Whether or not the API was successfully loaded.
-     * 
+     *
      * @deprecated Use @{require}.
      * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:loadAPI)
      * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.loadAPI)
@@ -40,14 +40,14 @@ declare namespace os {
     /**
      * - Pause execution of the current thread and waits for any events matching
      * `filter`.
-     * 
+     *
      * This function @{coroutine.yield|yields} the current process and waits for it
      * to be resumed with a vararg list where the first element matches `filter`.
      * If no `filter` is supplied, this will match all events.
-     * 
+     *
      * Unlike @{os.pullEventRaw}, it will stop the application upon a "terminate"
      * event, printing the error "Terminated".
-     * 
+     *
      * @param[opt] string filter Event to filter for.
      * @tupleReturn
      * @return string event The name of the event that fired.
@@ -64,7 +64,7 @@ declare namespace os {
      *     while true do
      *         local eventData = {os.pullEvent()}
      *         local event = eventData[1]
-     * 
+     *
      *         if event == "mouse_click" then
      *             print("Button", eventData[2], "was clicked at", eventData[3], ",", eventData[4])
      *         elseif event == "key" then
@@ -451,23 +451,23 @@ declare namespace os {
     /**
      * Pause execution of the current thread and waits for events, including the
      * `terminate` event.
-     * 
+     *
      * This behaves almost the same as @{os.pullEvent}, except it allows you to handle
      * the `terminate` event yourself - the program will not stop execution when
      * <kbd>Ctrl+T</kbd> is pressed.
-     * 
+     *
      * @tparam[opt] string filter Event to filter for.
      * @treturn string event The name of the event that fired.
      * @treturn any param... Optional additional parameters of the event.
      * @usage Listen for `terminate` events.
-     * 
+     *
      *     while true do
      *         local event = os.pullEventRaw()
      *         if event == "terminate" then
      *             print("Caught terminate event!")
      *         end
      *     end
-     * 
+     *
      * @see os.pullEvent To pull events normally.
      * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEventRaw)
      * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEventRaw)
@@ -485,7 +485,7 @@ declare namespace os {
 
     /**
      * Get the current CraftOS version (for example, `CraftOS 1.8`).
-     * 
+     *
      * This is defined by `bios.lua`. For the current version of CC:Tweaked, this
      * should return `CraftOS 1.8`.
      *
@@ -496,24 +496,24 @@ declare namespace os {
 
     /**
      * - Run the program at the given path with the specified environment and arguments.
-     * 
+     *
      * This function does not resolve program names like the shell does. This means
      * that, for example, `os.run("edit")` will not work. As well as this, it does not
      * provide access to the @{shell} API in the environment. For this behaviour, use
      * @{shell.run} instead.
-     * 
+     *
      * If the program cannot be found, or failed to run, it will print the error and
      * return `false`. If you want to handle this more gracefully, use an alternative
      * such as @{loadfile}.
-     * 
+     *
      * @tparam table env The environment to run the program with.
      * @tparam string path The exact path of the program to run.
      * @param ... The arguments to pass to the program.
      * @treturn boolean Whether or not the program ran successfully.
      * @usage Run the default shell from within your program:
-     * 
+     *
          * os.run({}, "/rom/programs/shell.lua")
-     * 
+     *
      * @see shell.run
      * @see loadfile
      * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:run)

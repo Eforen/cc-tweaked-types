@@ -1,6 +1,7 @@
 // Defined in bios.lua
 /** @noSelfInFile */
 
+type ComputerSide = 'top' | 'bottom' | 'left' | 'right' | 'front' | 'back'
 declare namespace os {
 
     /**
@@ -17,6 +18,8 @@ declare namespace os {
      * @treturn boolean Whether or not the API was successfully loaded.
      *
      * @deprecated Use @{require}.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:loadAPI)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.loadAPI)
      */
     function loadAPI(path: string):void
 
@@ -27,6 +30,8 @@ declare namespace os {
      * --
      * -- @tparam string name The name of the API to unload.
      * -- @deprecated Use @{require}.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:unloadAPI)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.unloadAPI)
      */
     function unloadAPI(name: string):void
 
@@ -68,13 +73,380 @@ declare namespace os {
      *     end
      * ```
      * @see os.pullEventRaw To pull the terminate event.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
      */
     function pullEvent(): [string, ...any[]]
     function pullEvent(filter: string): [string, ...any[]]
-    function pullEvent(filter: "key"): [string, number, boolean]
-    function pullEvent(filter: "mouse_click"): [event:"mouse_click", button: string, x: number, y: number]
-    /** @return {[string, number]} event tuple */
-    function pullEvent(filter: "alarm"): [event: "alarm", id: number]
+    /**
+     * Fired when text is typed on the keyboard
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     * @see [ComputerCraft Wiki(Char_event)](https://www.computercraft.info/wiki/Char_(event))
+     */
+    function pullEvent(filter: "char"): Events.CharEvent
+    function pullEvent(filter: "mouse_click"): Events.MouseClickEvent
+    /** 
+     * @return {[string, number]} event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "alarm"): Events.AlarmEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "alarm"): Events.AlarmEvent
+    
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "char"): Events.CharEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "key"): Events.KeyEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "keyup"): Events.KeyUpEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "paste"): Events.PasteEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "timer"): Events.TimerEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "alarm"): Events.AlarmEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "task_complete"): Events.TaskCompleteEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "redstone"): Events.RedstoneEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "terminate"): Events.TerminateEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "disk"): Events.DiskEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "disk_eject"): Events.DiskEjectEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "peripheral"): Events.PeripheralEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "peripheral_detach"): Events.PeripheralDetachEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "rednet_message"): Events.RednetMessageEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "modem_message"): Events.ModemMessageEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "http_success"): Events.HttpSuccessEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "http_failure"): Events.HttpFailureEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "mouse_click"): Events.MouseClickEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "mouse_up"): Events.MouseUpEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "mouse_scroll"): Events.MouseScrollEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "mouse_drag"): Events.MouseDragEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "mouse_touch"): Events.MouseTouchEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "monitor_resize"): Events.MonitorResizeEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "term_resize"): Events.TermResizeEvent
+    /** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+    function pullEvent(filter: "turtle_inventory"): Events.TurtleInventoryEvent
+
+    /**
+     * [Event Types on ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent#Event_types)
+     */
+
+    namespace Events {
+        type AnyEvent = AnonymiseEvent | CharEvent | MouseClickEvent | AlarmEvent
+        type AnonymiseEvent = [string, ...any[]]
+        /**
+         * Fired when text is typed on the keyboard
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(Char_event)](https://www.computercraft.info/wiki/Char_(event))
+         */
+        type CharEvent = [event: "char", letter: string]
+        /**
+         * Fired when a key is pressed on the keyboard
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] keycode {number} numerical keycode
+         * @tuple[3] is being held
+         * @see [ComputerCraft Wiki(Char_event)](https://www.computercraft.info/wiki/Key_(event))
+         */
+        type KeyEvent = [event: "key", keycode: number, held: boolean]
+        /**
+         * Fired when a key is released 
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] keycode {number}
+         * @see [ComputerCraft Wiki(Key_up_event)](https://www.computercraft.info/wiki/Key_up_(event))
+         */
+        type KeyUpEvent = [event: "keyup", keycode: number]
+        /**
+         * Fired when Ctrl + V is pressed on the keyboard
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] text {string} system clipboard text
+         * @see [ComputerCraft Wiki(Paste_event)](https://www.computercraft.info/wiki/Paste_(event))
+         */
+        type PasteEvent = [event: "paste", text: string]
+        /**
+         * Fired when a timeout started by [os.startTimer()](https://tweaked.cc/module/os.html#v:startTimer) completes 
+         * @tuple[1] event {string} The letter typed
+         * @tuple[2] timer {TimerToken} Value of the timer as returned by os.startTimer()
+         * @see [ComputerCraft Wiki(Timer_event)](https://www.computercraft.info/wiki/Timer_(event))
+         */
+        type TimerEvent = [event: "timer", timer: TimerToken]
+        /**
+         * Fired when a time passed to os.setAlarm() is reached 
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] timer {TimerToken} Value of the alarm as returned by os.setAlarm()
+         * @see [ComputerCraft Wiki(Alarm_event)](https://www.computercraft.info/wiki/Alarm_(event))
+         */
+        type AlarmEvent = [event: "alarm", timer: TimerToken]
+        /**
+         * Fired when an asynchronous task completes.
+         * __________________________________________
+         * Used by every [commands API](https://www.computercraft.info/wiki/Commands_(API)) method internally which yields,
+         * including [commands.execAsync()](https://www.computercraft.info/wiki/Commands.execAsync), 
+         * but excluding [commands.getBlockPosition()](https://www.computercraft.info/wiki/Commands.getBlockPosition). 
+         * 
+         * Also used internally by every [command block's method](https://www.computercraft.info/wiki/Command_Block_(API)). 
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] taskID {number} the task ID
+         * @tuple[3] success {boolean}
+         * @tuple[4] error {string|null} if there is an error this is where it will be
+         * @tuple[...] param1, param2, param3, param4
+         * @see [ComputerCraft Wiki(Task_complete_event)](https://www.computercraft.info/wiki/Task_complete_(event))
+         */
+        type TaskCompleteEvent = [event: "task_complete", taskID: number, success: boolean, error: string|null, ...args: any[]]
+        /**
+         * Fired when the state of any of the redstone inputs change 
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(Redstone_event)](https://www.computercraft.info/wiki/Redstone_(event))
+         */
+        type RedstoneEvent = [event: "redstone"]
+        /**
+         * Fired when a combination of keys CTRL and T is pressed and held for three seconds.
+         * 
+         * You will not normally see this event, as it is handled inside os.pullEvent. 
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(Terminate_event)](https://www.computercraft.info/wiki/Terminate_(event))
+         */
+        type TerminateEvent = [event: "terminate"]
+        /**
+         * Fired when a disk is inserted into an adjacent disk drive 
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] side {string} the side of the computer that the peripheral generating the event is connected
+         * @see [ComputerCraft Wiki(Disk_event)](https://www.computercraft.info/wiki/Disk_(event))
+         */
+        type DiskEvent = [event: "disk", side: ComputerSide]
+        /**
+         * Fired when a disk is removed from an adjacent disk drive
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] side {string} the side of the computer that the peripheral generating the event is connected
+         * @see [ComputerCraft Wiki(Disk_eject_event)](https://www.computercraft.info/wiki/Disk_eject_(event))
+         */
+        type DiskEjectEvent = [event: "disk_eject", side: ComputerSide]
+        /**
+         * Fired when peripheral is attached 
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] side {string} the side of the computer that the peripheral generating the event is connected
+         * @see [ComputerCraft Wiki(Peripheral_event)](https://www.computercraft.info/wiki/Peripheral_(event))
+         */
+        type PeripheralEvent = [event: "peripheral", side: ComputerSide]
+        /**
+         * Fired when peripheral is removed 
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] side {string} the side of the computer that the peripheral generating the event is connected
+         * @see [ComputerCraft Wiki(Peripheral_detach_event)](https://www.computercraft.info/wiki/Peripheral_detach_(event))
+         */
+        type PeripheralDetachEvent = [event: "peripheral_detach", side: ComputerSide]
+        /**
+         * Fired when a rednet message is received from the rednet API
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] senderID {number}
+         * @tuple[3] message {any} the transmitted data
+         * @tuple[4] distance {number} the distance the message traveled
+         * @see [ComputerCraft Wiki(Rednet_message_event)](https://www.computercraft.info/wiki/Rednet_message_(event))
+         */
+        type RednetMessageEvent = [event: "rednet_message", senderID: number, message: any, distance: number]
+        /**
+         * Fired when a wireless modem message is received from the wireless modem
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] frequency {number}
+         * @tuple[3] replyFrequency {number}
+         * @tuple[4] message {any}
+         * @tuple[5] distance {number} the distance the message traveled
+         * @see [ComputerCraft Wiki(Modem_message_event)](https://www.computercraft.info/wiki/Modem_message_(event))
+         */
+        type ModemMessageEvent = [event: "modem_message", side: ComputerSide, frequency: number, replyFrequency: number, message: any, distance: number]
+        /**
+         * Fired when an attempt to receive text from / post text on a website is successful.
+         * 
+         * You will not normally see this event as it is handled inside http.get. 
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] url {string} the url of the website
+         * @tuple[3] html {string} the html text of the website
+         * @see [ComputerCraft Wiki(Http_success_event)](https://www.computercraft.info/wiki/Http_success_(event))
+         */
+        type HttpSuccessEvent = [event: "http_success", url: string, html:any]
+        /**
+         * Fired when an attempt to receive text from / post text on a website is unsuccessful
+         * 
+         * You will not normally see this event as it is handled inside http.get. 
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] url {string} the url of the website
+         * @see [ComputerCraft Wiki(Http_failure_event)](https://www.computercraft.info/wiki/Http_failure_(event))
+         */
+        type HttpFailureEvent = [event: "http_failure", url: string]
+        /**
+         * Fired when a mouse button is pressed 
+         * @tuple[1] event {string} the letter typed
+         * @tuple[2] button {number} mouse button
+         * @tuple[3] x {number} x coordinate
+         * @tuple[4] y {number} y coordinate
+         * @see [ComputerCraft Wiki(Mouse_click_event)](https://www.computercraft.info/wiki/Mouse_click_(event))
+         */
+        type MouseClickEvent = [event:"mouse_click", button: number, x: number, y: number]
+        /**
+         * 
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(event)]()
+         */
+        type MouseUpEvent = [event: "mouse_up", button: number, x: number, y: number]
+        /**
+         * 
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(event)]()
+         */
+        type MouseScrollEvent = [event: "mouse_scroll", scroll: number, x: number, y: number]
+        /**
+         * 
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(event)]()
+         */
+        type MouseDragEvent = [event: "mouse_drag", button: number, x: number, y: number]
+        /**
+         * 
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(event)]()
+         */
+        type MouseTouchEvent = [event: "mouse_touch", button: number, x: number, y: number]
+        /**
+         * 
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(event)]()
+         */
+        type MonitorResizeEvent = [event: "monitor_resize", side: ComputerSide, x: number, y: number]
+        /**
+         * 
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(event)]()
+         */
+        type TermResizeEvent = [event: "term_resize"]
+        /**
+         * 
+         * @tuple[1] event {string} the letter typed
+         * @see [ComputerCraft Wiki(event)]()
+         */
+        type TurtleInventoryEvent = [event: "turtle_inventory"]
+    }
 
     /**
      * Pause execution of the current thread and waits for events, including the
@@ -97,6 +469,8 @@ declare namespace os {
      *     end
      *
      * @see os.pullEvent To pull events normally.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEventRaw)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEventRaw)
      */
     function pullEventRaw(filter?: string): any
 
@@ -104,6 +478,8 @@ declare namespace os {
      * Pauses execution for the specified number of seconds, alias of @{_G.sleep}.
      *
      * @param seconds The number of seconds to sleep for, rounded up to the nearest multiple of 0.05.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:sleep)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.sleep)
      */
     function sleep(seconds:number):void
 
@@ -140,6 +516,8 @@ declare namespace os {
      *
      * @see shell.run
      * @see loadfile
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:run)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.run)
      */
     function run(env:any, path:any, ...args:any[]):void
 
@@ -163,6 +541,8 @@ declare namespace os {
      *   {@code timer} event, or {@link #cancelTimer cancel the timer}.
      * @throws LuaException If the time is below zero.
      * @see #cancelTimer To cancel a timer.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:startTimer)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.startTimer)
      */
     function startTimer( seconds:number ): TimerToken
 
@@ -175,6 +555,8 @@ declare namespace os {
      * @cc.tparam string name The name of the event to queue.
      * @cc.param ... The parameters of the event.
      * @cc.see os.pullEvent To pull the event queued
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:queueEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.queueEvent)
      */
     function queueEvent( name: string, ...args: any[] ): void
 
@@ -184,6 +566,8 @@ declare namespace os {
      *
      * @param token The ID of the timer to cancel.
      * @see #startTimer To start a timer.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:cancelTimer)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.cancelTimer)
      */
     function cancelTimer( token: TimerToken ): void
 
@@ -203,6 +587,23 @@ declare namespace os {
      *   {@code alarm} event, or {@link #cancelAlarm cancel the alarm}.
      * @throws LuaException If the time is out of range.
      * @see #cancelAlarm To cancel an alarm.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:setAlarm)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.setAlarm)
+     * @usage
+     * The basic usage of **os.setAlarm** From a [forum Post](https://www.computercraft.info/forums2/index.php?/topic/5599-ossetalarm/page__view__findpost__p__46168) by jag_e_nummer_ett.
+     * ```ts
+     * // Basic format
+     * os.setAlarm(time)
+     * // Will timeout when it's 18 o'clock in the world
+     * os.setAlarm(18.00)
+     * // Will timeout 2 (in-game) hours later
+     * os.setAlarm(os.time()+2)
+     * // Basic event layout
+     * let [ev,p1] = os.pullEvent("alarm")
+     * // Event output
+     * // > ev == "alarm": true
+     * // > p1: A table that acts like it's unique ID
+     * ```
      */
     function setAlarm( time: number ): AlarmToken
 
@@ -212,16 +613,22 @@ declare namespace os {
      *
      * @param token The ID of the alarm to cancel.
      * @see #setAlarm To set an alarm.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:cancelAlarm)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.cancelAlarm)
      */
     function cancelAlarm( token:number ):void
 
     /**
      * Shuts down the computer immediately.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:shutdown)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.shutdown)
      */
     function shutdown(): void
 
     /**
      * Reboots the computer immediately.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:reboot)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.reboot)
      */
     function reboot():void
 
@@ -236,6 +643,8 @@ declare namespace os {
      * Returns the ID of the computer.
      *
      * @return The ID of the computer.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:getComputerID)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.getComputerID)
      */
     function getComputerID(): ComputerID
 
@@ -243,6 +652,8 @@ declare namespace os {
      * Returns the ID of the computer.
      *
      * @return The ID of the computer.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:computerID)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.computerID)
      */
     function computerID(): ComputerID
 
@@ -251,6 +662,8 @@ declare namespace os {
      *
      * @return The label of the computer.
      * @cc.treturn string The label of the computer.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:getComputerLabel)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.getComputerLabel)
      */
     function getComputerLabel(): string
 
@@ -259,6 +672,8 @@ declare namespace os {
      *
      * @return The label of the computer.
      * @cc.treturn string The label of the computer.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:computerLabel)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.computerLabel)
      */
     function computerLabel(): string
 
@@ -266,6 +681,8 @@ declare namespace os {
      * Set the label of this computer.
      *
      * @param label The new label. May be {@code null} in order to clear it.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:setComputerLabel)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.setComputerLabel)
      */
     function setComputerLabel( label?: string | null | undefined ): void
 
@@ -279,6 +696,8 @@ declare namespace os {
      * Returns the number of seconds that the computer has been running.
      *
      * @return The computer's uptime.
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:clock)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.clock)
      */
     function clock(): Seconds
 

@@ -249,6 +249,33 @@ declare namespace os {
      * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
      */
     function pullEvent(filter: "turtle_inventory"): Events.TurtleInventoryEvent
+	/** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+	function pullEvent(filter: "websocket_closed"): Events.WebsocketClosedEvent
+
+	/** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+	function pullEvent(filter: "websocket_failure"): Events.WebsocketFailureEvent
+
+	/** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+	function pullEvent(filter: "websocket_message"): Events.WebsocketMessageEvent
+
+	/** 
+     * @return event tuple 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/os.html#v:pullEvent)
+     * @see [[Out of Date] ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent)
+     */
+	function pullEvent(filter: "websocket_success"): Events.WebsocketSuccessEvent
 
     /**
      * [Event Types on ComputerCraft Wiki](https://www.computercraft.info/wiki/Os.pullEvent#Event_types)
@@ -446,6 +473,33 @@ declare namespace os {
          * @see [ComputerCraft Wiki(event)]()
          */
         type TurtleInventoryEvent = [event: "turtle_inventory"]
+		/**
+		 * 
+         * @tuple[1] event {string} The URL of the WebSocket that was closed.
+         * @see [CC Tweaked](https://tweaked.cc/event/websocket_closed.html)
+         */
+		type WebsocketClosedEvent = [event: "websocket_closed", url: string]
+		/**
+		 * 
+         * @tuple[1] event {string} The URL of the site requested.
+         * @tuple[2] event {string} An error describing the failure.
+         * @see [CC Tweaked](https://tweaked.cc/event/websocket_failure.html)
+         */
+		type WebsocketFailureEvent = [event: "websocket_failure", url: string, error: string]
+		/**
+		 * 
+         * @tuple[1] event {string} The URL of the WebSocket.
+         * @tuple[2] event {string} The contents of the message.
+         * @see [CC Tweaked](https://tweaked.cc/event/websocket_message.html)
+         */
+		type WebsocketMessageEvent = [event: "websocket_message", url: string, message: string]
+		/**
+		 * 
+         * @tuple[1] event {string} The URL of the site.
+         * @tuple[2] event {lWebSocket} The handle for the WebSocket.
+         * @see [CC Tweaked](https://tweaked.cc/event/websocket_success.html)
+         */
+		type WebsocketSuccessEvent = [event: "websocket_success", url: string, websocket: lWebSocket]
     }
 
     /**

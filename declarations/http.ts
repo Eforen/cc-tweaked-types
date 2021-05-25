@@ -19,26 +19,32 @@ declare namespace http {
     type HttpRequest = {
         /**
          * The url to request
+         * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:request)
          */
         url: string;
         /**
          * An optional string containing the body of the request. If specified, a POST request will be made instead.
+         * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:request)
          */
         body?: string;
         /**
          * Additional headers to send as part of this request.
+         * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:request)
          */
         headers?: Headers;
         /**
          * Whether to make a binary HTTP request. If true, the body will not be UTF-8 encoded, and the received response will not be decoded.
+         * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:request)
          */
         binary?: boolean;
         /**
          * Which HTTP method to use, for instance "PATCH" or "DELETE".
+         * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:request)
          */
         method?: AnyCase<HttpMethod>;
         /**
          * Whether to follow HTTP redirects. Defaults to true.
+         * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:request)
          */
         redirect?: boolean;
     };
@@ -53,7 +59,9 @@ declare namespace http {
      * @tupleReturn
      * @return[1] false If the websocket connection failed.
      * @return[2] string An error message describing why the connection failed.
-     *
+     * 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:websocket)
+     * @see [[Out of Date] ComputerCraft Wiki](https://wiki.computercraft.cc/Http.websocket)
      */
     function websocket(url: string, headers?: Headers): lWebSocket | [ false, string ];
 
@@ -68,7 +76,9 @@ declare namespace http {
      * @tupleReturn
      * @return[1] false If the websocket connection failed.
      * @return[2] string An error message describing why the connection failed.
-     *
+     * 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:websocketAsync)
+     * @see [Out of Date] ComputerCraft Wiki (Blank Docs Page)
      */
     function websocketAsync(url: string, headers?: Headers): true | [ false, string ];
 
@@ -84,6 +94,9 @@ declare namespace http {
      * @tupleReturn
      * @return[1] false If the http request failed.
      * @return[2] string An error message describing why the request failed.
+     * 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:request)
+     * @see [[Out of Date] ComputerCraft Wiki](https://wiki.computercraft.cc/Http.request)
      */
     function request(url: string, body?: string, headers?: Headers, binary?: boolean): true | [ false, string ];
 
@@ -96,6 +109,9 @@ declare namespace http {
      * @tupleReturn
      * @return[1] false If the http request failed.
      * @return[2] string An error message describing why the request failed.
+     * 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#v:request)
+     * @see [[Out of Date] ComputerCraft Wiki](https://wiki.computercraft.cc/Http.request)
      */
     function request(request: HttpRequest): true | [ false, string ];
 }
@@ -112,7 +128,9 @@ declare class lWebSocket {
      * @return[1] string The received message.
      * @return[2] boolean If this was a binary message.
      * @throws If the websocket has been closed
-     *
+     * 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#ty:Websocket:receive)
+     * @see [[Out of Date] ComputerCraft Wiki](https://wiki.computercraft.cc/Websocket.receive)
      */
     receive(timeout?: number): [string, boolean] | null;
 
@@ -123,11 +141,17 @@ declare class lWebSocket {
      * @param binary? boolean Whether this message should be treated as a
      * @throws If the message is too large.
      * @throws If the websocket has been closed.
+     * 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#ty:Websocket:send)
+     * @see [[Out of Date] ComputerCraft Wiki](https://wiki.computercraft.cc/Websocket.send)
      */
     send(message:any, binary?: boolean): void;
 
     /**
-     *     Close this websocket. This will terminate the connection, meaning messages can no longer be sent or received along it.
+     * Close this websocket. This will terminate the connection, meaning messages can no longer be sent or received along it.
+     * 
+     * @see [CC: Tweaked Docs](https://tweaked.cc/module/http.html#ty:Websocket:close)
+     * @see [[Out of Date] ComputerCraft Wiki](https://wiki.computercraft.cc/Websocket.close)
      */
     close(): void;
 

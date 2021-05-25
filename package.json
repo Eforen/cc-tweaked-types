@@ -1,6 +1,6 @@
 {
   "name": "cc-tweaked-types",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Typescript definitions for making code that can be transpiled to CC: Tweaked varient ComputerCraft Lua Code for computing in minecraft",
   "main": "declarations/index.d.ts",
   "scripts": {
